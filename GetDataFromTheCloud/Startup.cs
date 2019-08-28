@@ -14,9 +14,11 @@ namespace GetDataFromTheCloud
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            Configuration = new ConfigurationBuilder().AddEnvironmentVariables()
+               .AddJsonFile(env.ContentRootPath + "/appsettings.json").Build();
         }
 
         public IConfiguration Configuration { get; }
